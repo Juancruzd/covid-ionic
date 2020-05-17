@@ -1,0 +1,70 @@
+<ion-header>
+    <ion-toolbar class="ios hydrated">
+    </ion-toolbar>
+</ion-header>
+<ion-content>
+    <div class="sfNKee">
+    </div>
+    <div class="xT64Qc">
+        <div class="MXd18e">
+            <header class="ZLYNCc">
+                <h2 class="Zhv0Vb" aria-label="Estadísticas y noticias">Coronavirus (COVID-19)</h2>
+                <span>
+                  <time class="vBLAZ Yt6XT" >{{Date}}</time></span>
+            </header>
+            <div class="GycLre" style="font-size: 15px !important;">
+                <form [formGroup]="select" padding-right>
+                    <ion-select cancelText="cancelar" okText="ok!" id="select" style="border: 1px solid #dadce0;
+                border-radius: 4px;
+                margin: 4px 0;" (click)="loadFlags(countries)" #C (ionChange)="onChange(C.value)" formControlName="country">
+                        <ion-select-option value={{countrie.Slug}} *ngFor=" let countrie of countries ">{{countrie.Country}}
+                        </ion-select-option>
+                    </ion-select>
+                </form>
+            </div>
+
+            <div class="UnO7qd ">
+                <div class="kSCnAc ">
+                    <div class="tZjT9b ">
+                        <div class="fNm5wd qs41qe ">
+                            <div class="RbBDcc ">Nuevos confirmados</div>
+                            <div class="UvMayb ">{{NewConfirmed}}</div>
+                        </div>
+                        <div class="fNm5wd gZvxhb ">
+                            <div class="RbBDcc ">Confirmados</div>
+                            <div class="UvMayb ">{{TotalConfirmed}}</div>
+                        </div>
+                        <div class="fNm5wd ckqIZ ">
+                            <div class="RbBDcc ">Nuevas Muertes</div>
+                            <div class="UvMayb ">{{NewDeaths}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="UnO7qd ">
+                <div class="kSCnAc ">
+                    <div class="tZjT9b ">
+                        <div class="fNm5wd qs41qe ">
+                            <div class="RbBDcc ">Muertes</div>
+                            <div class="UvMayb ">{{TotalDeaths}}</div>
+                        </div>
+                        <div class="fNm5wd gZvxhb ">
+                            <div class="RbBDcc ">Nuevas personas recuperadas</div>
+                            <div class="UvMayb ">{{NewRecovered}}</div>
+                        </div>
+                        <div class="fNm5wd ckqIZ ">
+                            <div class="RbBDcc ">Personas recuperadas</div>
+                            <div class="UvMayb ">{{TotalRecovered}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mvmWx "><span><span class="myJcNd aUtkAd "><span id="c5 ">Fuente</span>:
+                <a class="YjZvJe GQQ5oc " href="https://covid19api.com/#details " target="_blank " aria-describedby="c5 "><span class="bGEAFd ">covid19api</span></a>
+                </span>
+                </span>
+            </div>
+        </div>
+    </div>
+</ion-content>

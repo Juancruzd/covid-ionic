@@ -1,0 +1,35 @@
+<ion-header>
+    <ion-toolbar color="light">
+        <ion-buttons slot="light">
+        </ion-buttons>
+        <ion-buttons slot="primary">
+            <ion-button fill="solid" color="light" (click)="logout()">
+                Cerrar sesion
+                <ion-icon slot="end" name="log-in-outline"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+        <ion-title>{{ email }}</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+
+<ion-tabs>
+
+    <ion-tab-bar slot="bottom" color="light">
+        <ion-tab-button tab="global">
+            <ion-icon name="globe-outline"></ion-icon>
+            <ion-label>Global</ion-label>
+        </ion-tab-button>
+
+        <ion-tab-button tab="country">
+            <ion-icon name="location-outline"></ion-icon>
+            <ion-label>Pais</ion-label>
+        </ion-tab-button>
+
+        <ion-tab-button tab="information">
+            <ion-icon name="information-circle-outline"></ion-icon>
+            <ion-label>Informacion</ion-label>
+        </ion-tab-button>
+    </ion-tab-bar>
+
+</ion-tabs>

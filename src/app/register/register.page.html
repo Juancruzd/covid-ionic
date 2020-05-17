@@ -1,0 +1,82 @@
+
+ 
+<!-- Back button with no text and custom icon <ion-header>
+  <ion-toolbar color="secondary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Register</ion-title>
+  </ion-toolbar>
+</ion-header>-->
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button text="Cancelar" icon="chevron-back-outline"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" >
+  <!--<video  autoplay muted loop src="/assets/video/fondologin.mp4"></video>-->
+      <ion-content padding="true" class="page-centered-element" scroll="false" force-overscroll="false"  >
+        <form  [formGroup]="myForm" id="login-form3" class="list center-form">
+          <div>
+            <img src="/assets/img/register.png" style="display: block; width: 100%; height: 100%; margin-left: auto; margin-right: auto;"/>
+          </div>
+          <ion-list id="login-list5" class="light-back" >
+
+            <ion-item style="margin-top: 20px;" >
+              <ion-label position="floating">Correo</ion-label>
+              <ion-input formControlName="email" style="width: 258px;" clearInput> </ion-input>
+            </ion-item>
+            <ion-item *ngIf="f.email.errors && f.email.dirty">
+              <p color="danger" ion-text *ngIf="f.email.errors.required">Se requiere el correo</p>
+              <p color="danger" ion-text *ngIf="f.email.errors.email">Correo incorrecto</p>
+            </ion-item>
+
+          <ion-item style="margin-top: 20px;" >
+                <ion-label position="floating" > Contrasena </ion-label>
+                
+              <div class="inputpassword-right">
+                <ion-input formControlName="password"  #input class="inputpassword" type="password" ></ion-input>
+                 <button  class="p-viewer noefectsbutton">
+                  <ion-icon #icon name="eye-off-outline"  aria-hidden="true" (click)="managePassword(input,icon)"></ion-icon>
+                 </button>
+              </div>
+            </ion-item>
+            <ion-item *ngIf="f.password.errors && f.password.dirty">
+              <p color="danger" ion-text *ngIf="f.password.errors.required">Se requiere la contrasena</p>
+            <p color="danger" ion-text *ngIf="f.password.errors.pattern">La Contrasena es debil</p>
+            <p color="danger" ion-text *ngIf="f.password.errors.mustMatch">Las contrasenas deben coincidir</p>
+            </ion-item>
+
+
+            <ion-item style="margin-top: 20px;" >
+              <ion-label position="floating" > Repita la contrasena </ion-label>
+              
+            <div class="inputpassword-right">
+              <ion-input formControlName="confirmPassword"  #inputreat class="inputpassword" type="password" ></ion-input>
+               <button  class="p-viewer noefectsbutton">
+                <ion-icon #iconrepeat name="eye-off-outline"  aria-hidden="true" (click)="managePassword(inputreat,iconrepeat)"></ion-icon>
+               </button>
+            </div>
+          </ion-item>
+          <ion-item *ngIf="f.confirmPassword.errors && f.confirmPassword.dirty">
+            <p color="danger" ion-text *ngIf="f.confirmPassword.errors.required">Se requiere la contrasena</p>
+            <p color="danger" ion-text *ngIf="f.confirmPassword.errors.pattern">La Contrasena es debil</p>
+            <p color="danger" ion-text *ngIf="f.confirmPassword.errors.mustMatch">Las contrasenas deben coincidir</p>
+          </ion-item>
+
+          </ion-list>
+          <div class="spacer" style="width: 300px; height: 10px;"></div>
+         <ion-button ion-button block (click)="Registrarse()" [disabled]="myForm.invalid" color="primary" expand="full" shape="round" style="margin-top: 20px;">
+            Registrarse  
+            </ion-button>
+        </form>
+
+
+         
+
+      </ion-content>
+      
+    </ion-content>
