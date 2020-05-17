@@ -6,11 +6,14 @@ import{HttpClient} from '@angular/common/http'
 export class ApiService {
 ///inicializar import http
 constructor(public http:HttpClient) { }
+
 ///paises afectados
 getcountries(){
   return this.http.get('https://api.covid19api.com/countries');
 }
+
 //resumen covid global country
+////Summary////global/////countries
 getsummary(){
   return this.http.get('https://api.covid19api.com/summary');
 } 
