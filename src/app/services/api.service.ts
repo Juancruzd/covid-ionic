@@ -17,4 +17,8 @@ getcountries(){
 getsummary(){
   return this.http.get('https://api.covid19api.com/summary');
 } 
+//Historical country 
+gethistoricalcountry(country){
+  return this.http.get('https://api.covid19api.com/total/dayone/country/'+country);
+} 
 }

@@ -2,10 +2,51 @@
     <ion-toolbar class="ios hydrated">
     </ion-toolbar>
 </ion-header>
-<ion-content>
-    <div class="sfNKee">
+<ion-content> 
+    
+    <div style="position: absolute;
+    top: 0;
+    right: auto;
+    bottom: auto;
+    left: 400px;
+    z-index: 3;
+    display: block;
+    width: 800px;
+    padding-top: 24px;
+    padding-right: 0;
+    padding-bottom: 32px;
+    padding-left: 24px;" [hidden]=hsgrafica>
+        <div class="MXd18e">
+            <header class="ZLYNCc">
+                <h2 class="Zhv0Vb" aria-label="Estadísticas y noticias">{{countryselected}}</h2>
+                <span>
+                    <!--se muestra la fecha de los datos-->
+                  <time class="vBLAZ Yt6XT" >{{Date}}</time></span>
+            </header>
+            <div class="GycLre" style="font-size: 15px !important;">  
+                <canvas baseChart  width="600" height="400"
+                [datasets]="chartData" 
+                [labels]="chartLabels" 
+                [options]="chartOptions" 
+                [colors]="chartColors"
+                [legend]="showLegend" 
+                [chartType]="chartType">
+                </canvas>
+            </div>
+        </div>
     </div>
-    <div class="xT64Qc">
+    <div style="position: absolute;
+    top: 0;
+    right: auto;
+    bottom: auto;
+    left: 0;
+    z-index: 3;
+    display: block;
+    width: 375px;
+    padding-top: 24px;
+    padding-right: 0;
+    padding-bottom: 32px;
+    padding-left: 24px;">
         <div class="MXd18e">
             <header class="ZLYNCc">
                 <h2 class="Zhv0Vb" aria-label="Estadísticas y noticias">Coronavirus (COVID-19)</h2>
@@ -16,9 +57,10 @@
             <div class="GycLre" style="font-size: 15px !important;">
                 <form [formGroup]="select" padding-right>
                     <!--se cicla el arreglo countries para agregar en el select-->
-                    <ion-select cancelText="cancelar" okText="ok!" id="select" style="border: 1px solid #dadce0;
+                    <ion-select cancelText="cancelar" okText="consultar" id="select" style="border: 1px solid #dadce0;
                 border-radius: 4px;
-                margin: 4px 0;" (click)="loadFlags(countries)" #countryflgs (ionChange)="onChange(countryflgs.value)" formControlName="country">
+                margin: 4px 0;" (click)="loadFlags(countries)" #countryflgs (ionChange)="onChange(countryflgs.value)" 
+                formControlName="country">
                         <ion-select-option value={{countrie.Slug}} *ngFor=" let countrie of countries ">{{countrie.Country}}
                         </ion-select-option>
                     </ion-select>

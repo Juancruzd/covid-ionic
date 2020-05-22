@@ -5,7 +5,8 @@ import { CommonModule } from '@angular/common';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { Tab1Page } from './tab1.page';
 import { ExploreContainerComponentModule } from '../explore-container/explore-container.module'; 
-
+import { ChartsModule } from 'ng2-charts';
+import { DatePipe } from '@angular/common';
 @NgModule({
   imports: [
     IonicModule,
@@ -13,8 +14,10 @@ import { ExploreContainerComponentModule } from '../explore-container/explore-co
     ReactiveFormsModule,
     FormsModule,
     ExploreContainerComponentModule,
-    RouterModule.forChild([{ path: '', component: Tab1Page }])
+    RouterModule.forChild([{ path: '', component: Tab1Page }]),
+    ChartsModule
   ],
-  declarations: [Tab1Page]
+  declarations: [Tab1Page],
+  providers: [DatePipe]
 })
 export class Tab1PageModule {}

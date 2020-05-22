@@ -15,7 +15,7 @@ import { environment } from './../environments/environment';
 
 import{HttpClientModule} from '@angular/common/http'
 import { ApiService } from './services/api.service'; 
-
+import 'chartjs-plugin-zoom';
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -23,7 +23,7 @@ import { ApiService } from './services/api.service';
       //inicializar nuestra conexion o aplicacion de firebase con sus configuraciones
       AngularFireModule.initializeApp(environment.firebaseConfig),///configuration firebase
       AngularFireAuthModule,///auth 
-      HttpClientModule////import http
+      HttpClientModule,////import http 
     ],
   providers: [
     ApiService,////provider
