@@ -11,7 +11,7 @@
     left: 400px;
     z-index: 3;
     display: block;
-    width: 800px;
+    width: 900px;
     padding-top: 24px;
     padding-right: 0;
     padding-bottom: 32px;
@@ -23,8 +23,16 @@
                     <!--se muestra la fecha de los datos-->
                   <time class="vBLAZ Yt6XT" >{{Date}}</time></span>
             </header>
-            <div class="GycLre" style="font-size: 15px !important;">  
-                <canvas baseChart  width="600" height="400"
+            <div class="GycLre" style="font-size: 15px !important;"> 
+                 <!--
+                     series datos
+                     labels fechas
+                     opciones de la grafica
+                     colores de las series
+                     legenda
+                     tipo de grafica
+                 --> 
+                <canvas baseChart  width="600" height="350" 
                 [datasets]="chartData" 
                 [labels]="chartLabels" 
                 [options]="chartOptions" 

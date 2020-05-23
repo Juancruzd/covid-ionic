@@ -15,7 +15,11 @@ import { environment } from './../environments/environment';
 
 import{HttpClientModule} from '@angular/common/http'
 import { ApiService } from './services/api.service'; 
+////import  chartjs-plugin-zoom
 import 'chartjs-plugin-zoom';
+
+
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],

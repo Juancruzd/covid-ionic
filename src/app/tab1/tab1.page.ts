@@ -15,35 +15,69 @@ import { DatePipe } from '@angular/common';
 })
 
 export class Tab1Page implements OnInit {   
-   // Data
-   chartData: ChartDataSets[] = [{ data: [], label: 'Confirmados' }];
+   // Data de grafica 4 series
+   chartData: ChartDataSets[] = [
+     { data: [], label: 'Confirmados' },
+     { data: [], label: 'Muertes' },
+     { data: [], label: 'Recuperados' },
+     { data: [], label: 'Activos' }];
+  ///arreglo de labels
    chartLabels: Label[];
-   // Options
+   // Options de la grafica
   chartOptions = {
     responsive: true,
+    ////titulo no mostrado
     title: {
       display: false,
-      text: 'Historial de casos confimados de'
+      text: ''
     },
     pan: {
       enabled: true,
       mode: 'xy'
     },
     zoom: {
+      ///poder hacer zoom sobre la grafica
       enabled: true,
       mode: 'xy'
     }
   };
+  ///color de la grafica
   chartColors: Color[] = [
     {
+      //color rojo confirmed
+      borderColor: '#FA5858',
+      backgroundColor: 'rgba(255,255,255,0)',
+      pointBackgroundColor: '#FA5858'
+    },
+    {
+      ///color negro muertes
       borderColor: '#000000',
-      backgroundColor: '#FA5858 '
+      backgroundColor: 'rgba(255,255,255,0)',
+      pointBackgroundColor: '#000000'
+    } ,
+    {
+      //color verde recuperados
+      borderColor: '#32CA40',
+      backgroundColor: 'rgba(255,255,255,0)',
+      pointBackgroundColor: '#32CA40'
+    } ,
+    {
+      //color azul activos
+      borderColor: '#4498D6',
+      backgroundColor: 'rgba(255,255,255,0)',
+      pointBackgroundColor: '#4498D6'
     }
   ];
-  chartType = 'bar';
-  showLegend = false; 
+  ///tipo de grafica line
+  chartType = 'line';
+  ///legenda visible
+  showLegend = true; 
+  ///variable para ocultar o mostrar grafica
   hsgrafica=true; 
-  ////variables de datos
+  //pais seleccionado en select mostrandose como titulo
+  countryselected
+
+  ////variables de datos 
   NewConfirmed;
   TotalConfirmed;
   NewDeaths;
@@ -51,8 +85,7 @@ export class Tab1Page implements OnInit {
   NewRecovered;
   TotalRecovered;
   Date;
-  //pais seleccionado
-  countryselected
+  
   ////formukario de select
   select: FormGroup; 
   ////arreglo de objetos de los paises afectados a mostrar en el select
@@ -86,6 +119,7 @@ export class Tab1Page implements OnInit {
         }; 
         ///La respuesta se hace tipo Country y se guarda en countries
         this.countries=data as Country[]; 
+        ///ordeno el arreglo de respuesta por country
         this.countries.sort((t1, t2) => {
           const name1 = t1.Country.toLowerCase();
           const name2 = t2.Country.toLowerCase();
@@ -148,37 +182,51 @@ export class Tab1Page implements OnInit {
 
 
 
-  ////Funcion de Busqueda
+  ////Funcion de Busqueda y grafica
   ///se accede a la informacion atravez de summary
   ///por medio de la etiqueta Countries
   ///recibe como parametro el value del ion select opcion seleccionado
+  ///se muestra la grafica solo a nivel pais
   onChange(value){  
     ////si lo que se selecciona es todos los paises se llama a ala funcion global
     if(value=="global"){
+      ///se vacea los valores de la grafica
       this.chartLabels = [];
       this.chartData[0].data = [];
+      this.chartData[1].data = []; 
+      this.chartData[2].data = []; 
+      this.chartData[3].data = []; 
+      ///se oculta la grafica
       this.hsgrafica=true;
-
+      ///se cosulta a nivel global
       this.fetchGlobal();
     }
     else
     {
       ////se accede a paises
-      this.api.getsummary().subscribe(
-        (data)=>{
+      this.api.getsummary().subscribe((data)=>{
           let country: any[] = [];  
+          ///paises
           country= data['Countries'] as Country[]; 
           ///se cicla la respuesta
           ///se filta para encontrar la coincidencia con 
           ///el value seleccionado atravez del SLUG
           country.forEach(item => {   
+            /// se filtra la seleccion
             if(item.Slug==value){
+              ///se formatea la fecha  dd-MM-yyyy con DatePipe
           this.Date= this.datePipe.transform(item.Date.substring(0, 10), 'dd-MM-yyyy');  
+          ///nuevos confimados
           this.NewConfirmed=item.NewConfirmed;
+          ///total de confirmados
           this.TotalConfirmed=item.TotalConfirmed;
+          ///nuevas muertes
           this.NewDeaths=item.NewDeaths;
+          ///total de muertes
           this.TotalDeaths=item.TotalDeaths;
+          ///nuevos recuperados
           this.NewRecovered=item.NewRecovered;
+          ///total de recuperados
           this.TotalRecovered=item.TotalRecovered;
             }
           });
@@ -187,15 +235,33 @@ export class Tab1Page implements OnInit {
        
       
       //////obtiene los datos historicos por pais
+      ///parametro value SLUG select
       this.api.gethistoricalcountry(value).subscribe(res => {
+        ///se muestra la grafica
         this.hsgrafica=false;
+        ////se hace la respuesta tipo objeto HISTORICAL
         const history = res as Historical[]; 
+        ///Se vacea los valores de la grafica
         this.chartLabels = [];
-        this.chartData[0].data = []; 
-        this.countryselected='Historial de casos confirmados de '+history[0].Country
+        this.chartData[0].data = [];
+        this.chartData[1].data = []; 
+        this.chartData[2].data = []; 
+        this.chartData[3].data = []; 
+        /// se agrega titulo a la divicion de la grafica tomando el nombre del pais seleccionado
+        this.countryselected='Historial de '+history[0].Country
+        ///se cicla la respuesta 
         for (let entry of history) {
+          //se agrega el objeto label formateando la fecha  dd-MM-yyyy con DatePipe
           this.chartLabels.push(this.datePipe.transform(entry.Date.substring(0, 10), 'dd-MM-yyyy'));
+          ///se toma el dato de confimado y se agrega a datos de la grafica
           this.chartData[0].data.push(entry.Confirmed);
+          ///se toma el dato de muertes y se agrega a datos de la grafica
+          this.chartData[1].data.push(entry.Deaths);
+           ///se toma el dato de Recuperados y se agrega a datos de la grafica
+           this.chartData[2].data.push(entry.Recovered);
+           ///se toma el dato de Activos y se agrega a datos de la grafica
+           this.chartData[3].data.push(entry.Active);
+          
         }
       });
     } 
